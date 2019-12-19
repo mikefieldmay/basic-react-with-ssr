@@ -55,7 +55,7 @@ app.get('/*', (req, res) => {
       if (context.url) {
         return res.redirect(301, context.url);
       }
-
+      
       return res.send(
         indexData
           .replace('<div id="root"></div>', `<div id="root">${app}</div>`)

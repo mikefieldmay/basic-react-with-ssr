@@ -6,7 +6,6 @@ export default resourceType => {
       return res.json();
     })
     .then(data => {
-      // only keep 10 first results
       return {[`${resourceType}`]: data.filter((_, idx) => idx < 10)};
     });
 };

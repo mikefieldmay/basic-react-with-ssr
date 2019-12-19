@@ -13,7 +13,7 @@ export const App = () => (
         <NavLink to="/todos">Todos</NavLink>
       </li>
       <li>
-        <NavLink to="/posts">Posts</NavLink>
+        <NavLink to="/todos/posts">Posts</NavLink>
       </li>
     </ul>
 
