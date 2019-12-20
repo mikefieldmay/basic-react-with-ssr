@@ -1,15 +1,7 @@
 import path from 'path';
 import fs from 'fs';
-
-import React from 'react';
 import express from 'express';
 import serialize from 'serialize-javascript';
-import ReactDOMServer from 'react-dom/server';
-import { StaticRouter } from 'react-router-dom';
-import Routes from '../src/routes'
-import { matchRoutes } from 'react-router-config';
-
-import { App } from '../src/App';
 import { renderServerApp } from '../src/renderServer';
 
 const PORT = process.env.PORT || 3006;
