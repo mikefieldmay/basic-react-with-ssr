@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import loadData from './loadData';
 import { renderRoutes } from 'react-router-config'
 
-const Mike = (props) => {
+const Posts = (props) => {
   const theData = props.staticContext && props.staticContext.posts ? props.staticContext.posts : []
 
   const [data, setData] = useState(theData)
@@ -26,4 +26,7 @@ const Mike = (props) => {
   );
 }
 
-export default Mike;
+export default {
+  component: Posts,
+  loadData: () => loadData("posts")
+};;

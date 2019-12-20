@@ -2,8 +2,6 @@ import React, {useState, useEffect} from 'react';
 import loadData from './loadData';
 import { renderRoutes } from 'react-router-config'
 
-
-
 const Todos= (props) => {
   const theData = props.staticContext && props.staticContext.todos ? props.staticContext.todos : []
 
@@ -28,4 +26,7 @@ const Todos= (props) => {
   );
 }
 
-export default Todos;
+export default {
+  component: Todos,
+  loadData: () => loadData("todos")
+};

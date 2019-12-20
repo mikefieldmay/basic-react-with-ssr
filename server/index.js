@@ -9,7 +9,8 @@ import { StaticRouter } from 'react-router-dom';
 import Routes from '../src/routes'
 import { matchRoutes } from 'react-router-config';
 
-import {App} from '../src/App';
+import { App } from '../src/App';
+import { renderServerApp } from '../src/renderServer';
 
 const PORT = process.env.PORT || 3006;
 const app = express();
@@ -17,31 +18,7 @@ const app = express();
 app.use(express.static('./dist'));
 
 app.get('/*', (req, res) => {
-
-  const matchingRoutes = matchRoutes(Routes, req.url);
-
-  let promises = [];
-
-  matchingRoutes.forEach(({route}) => {
-    if (route.loadData) {
-      promises.push(route.loadData());
-    } else {
-      promises.push(Promise.resolve(null));
-    }
-  })
-
-  Promise.all(promises).then(data => {
-    const context = data.reduce((map, obj) => {
-      const newObj = {...map, ...obj};
-      return newObj;
-    }, {});
-
-    const app = ReactDOMServer.renderToString(
-      <StaticRouter location={req.url} context={context}>
-        <App />
-      </StaticRouter>
-    );
-
+  renderServerApp(req).then(({app, context}) => {
     const indexFile = path.resolve('./dist/index.html');
     fs.readFile(indexFile, 'utf8', (err, indexData) => {
       if (err) {

@@ -1,7 +1,6 @@
 
 import React from 'react'
 import Todos from "./Todos"
-import loadData from './loadData';
 import Posts from './Posts';
 
 const Routes = [
@@ -12,13 +11,11 @@ const Routes = [
   },
   {
     path: '/todos',
-    component: Todos,
-    loadData: () => loadData('todos'),
+    ...Todos,
     routes: [
       {
         path: '/todos/posts',
-        component: Posts,
-        loadData: () => loadData('posts')
+        ...Posts
       }
     ]
   }
