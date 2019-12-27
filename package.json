@@ -6,6 +6,7 @@
   "scripts": {
     "build": "webpack --mode production",
     "build-dev": "webpack",
+    "serve": "webpack-dev-server --mode development",
     "dev:build-server": "NODE_ENV=development webpack --config webpack.server.js --mode=development -w",
     "dev:start": "nodemon ./server-build/index.js",
     "dev": "npm-run-all --parallel build-dev dev:*"
@@ -38,6 +39,7 @@
     "nodemon": "^2.0.2",
     "npm-run-all": "^4.1.5",
     "react": "^16.12.0",
+    "react-async-ssr": "^0.6.0",
     "react-dom": "^16.12.0",
     "react-router-config": "^5.1.1",
     "react-router-dom": "^5.1.2",

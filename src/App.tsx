@@ -1,10 +1,12 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { Switch, NavLink } from 'react-router-dom';
 import Routes from './routes'
 import { renderRoutes } from 'react-router-config'
 
+const Loading = () => <div>Loading</div>
+
 export const App = () => (
-  <div>
+  <Suspense fallback={<Loading />}>
     <ul>
       <li>
         <NavLink to="/">Home</NavLink>
@@ -20,5 +22,5 @@ export const App = () => (
     <Switch>
       {renderRoutes(Routes)}
     </Switch>
-  </div>
+  </Suspense>
 );
