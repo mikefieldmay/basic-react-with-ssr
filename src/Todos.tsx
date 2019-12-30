@@ -1,13 +1,14 @@
-import React from 'react';
-import { useQuery } from '@apollo/react-hooks';
-import gql from 'graphql-tag'
-import { Route } from 'react-router-dom';
-import { Posts } from './Posts'
+import React from "react";
+import { useQuery } from "@apollo/react-hooks";
+import { Route } from "react-router-dom";
+import gql from "graphql-tag";
+import { Posts } from "./Posts";
+import { H1, P, ThemeProvider, theTimesTheme, UnorderedList } from "newskit";
 
 const query = gql`
   query todos {
     todos @rest(type: "Todos", path: "todos") {
-      id,
+      id
       title
     }
   }
@@ -16,14 +17,16 @@ const query = gql`
 const Todos = () => {
   const { loading, error, data } = useQuery(query);
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error :(</p>;
+  if (loading) return <P>Loading...</P>;
+  if (error) return <P>Error :(</P>;
   return (
-    <div>
-      <h1>Todos</h1>
-      <ul>{data.todos.slice(0, 10).map(todo => <li key={todo.id}>{todo.title}</li>)}</ul>
-      <Route path="/todos/posts" component={Posts}/>
-    </div>
+    <ThemeProvider theme={theTimesTheme}>
+      <H1>TODOS</H1>
+      {data.todos.slice(0, 10).map(todo => (
+        <UnorderedList key={todo.id}>{todo.title}</UnorderedList>
+      ))}
+      <Route path="/todos/posts" component={Posts} />
+    </ThemeProvider>
   );
-}
+};
 export default Todos;

@@ -1,23 +1,19 @@
 import React from "react";
-import { Switch, NavLink, Route } from 'react-router-dom';
+import { Switch, NavLink, Route } from "react-router-dom";
 import Todos from "./Todos";
+import { ThemeProvider, theTimesTheme, UnorderedList } from "newskit";
 
 export const App = () => (
-  <div>
-    <ul>
-      <li>
-        <NavLink to="/">Home</NavLink>
-      </li>
-      <li>
-        <NavLink to="/todos">Todos</NavLink>
-      </li>
-      <li>
-        <NavLink to="/todos/posts">Posts</NavLink>
-      </li>
-    </ul>
+  <ThemeProvider theme={theTimesTheme}>
+    <UnorderedList>
+      <NavLink to="/">Home</NavLink>
+      <NavLink to="/todos">Todos</NavLink>
+      <NavLink to="/todos/posts">Posts</NavLink>
+    </UnorderedList>
 
     <Switch>
-      <Route path="/" exact component={() => <div>Home</div>}/>
-      <Route path="/todos" component={Todos}/>
+      <Route path="/" exact component={() => <div>Home</div>} />
+      <Route path="/todos" component={Todos} />
     </Switch>
-  </div>)
+  </ThemeProvider>
+);
