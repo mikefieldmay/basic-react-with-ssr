@@ -1,27 +1,29 @@
-import React from 'react';
-import { useQuery } from '@apollo/react-hooks';
-import gql from 'graphql-tag'
+import React from "react";
+import { useQuery } from "@apollo/react-hooks";
+import gql from "graphql-tag";
+import { H1, P, ThemeProvider, theTimesTheme, UnorderedList } from "newskit";
 
 const query = gql`
   query posts {
     posts @rest(type: "Posts", path: "posts") {
-      id,
+      id
       title
     }
   }
 `;
 
-
 export const Posts = () => {
   const { loading, error, data } = useQuery(query);
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error :(</p>;
+  if (loading) return <P>Loading...</P>;
+  if (error) return <P>Error :(</P>;
 
   return (
-    <div>
-      <h1>POSTS</h1>
-      <ul>{data.posts.slice(0,10).map(post => <li key={post.id}>{post.title}</li>)}</ul>
-    </div>
+    <ThemeProvider theme={theTimesTheme}>
+      <H1>POSTS</H1>
+      {data.posts.slice(0, 10).map(post => (
+        <UnorderedList key={post.id}>{post.title}</UnorderedList>
+      ))}
+    </ThemeProvider>
   );
-}
+};
